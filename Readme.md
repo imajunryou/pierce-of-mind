@@ -16,9 +16,9 @@ To get up and running, there are 3 broad steps that you need to accomplish:
 ## Configuring Environment variables
 On Linux or MacOS, this can be done with:
 
-         ```
-         export PIERCE_OF_MIND_CONFIG=path/to/settings.cfg
-         ```
+```bash
+export PIERCE_OF_MIND_CONFIG=path/to/settings.cfg
+```
 
 Windows instructions are... on the to-do list...
 
