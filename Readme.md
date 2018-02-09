@@ -25,19 +25,19 @@ Windows instructions are... on the to-do list...
 # Starting a local server
 Navigate to your local copy of this repository, and enter the following:
 
-```python
+```bash
 python manage.py runserver
 ```
 
 If you have multiple copies of Python, you may need to specify which version you want to use:
 
-```python
+```bash
 python3 manage.py runserver
 ```
 
 If you successfully activate the server, you should see something like:
 
-```
+```bash
  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
  * Restarting with stat
  * Debugger is active!
