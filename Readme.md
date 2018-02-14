@@ -20,7 +20,11 @@ On Linux or MacOS, this can be done with:
 export PIERCE_OF_MIND_CONFIG=path/to/settings.cfg
 ```
 
-Windows instructions are... on the to-do list...
+On Windows, this can be done with:
+
+```
+set PIERCE_OF_MIND_CONFIG=path\to\settings.cfg
+```
 
 # Starting a local server
 Navigate to your local copy of this repository, and enter the following:
