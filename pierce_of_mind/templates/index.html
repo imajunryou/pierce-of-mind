@@ -20,21 +20,21 @@
     <div class="main-container">
         <div class="main wrapper clearfix">
 
-            <article>
-                <header>
-                    <h1>article header h1</h1>
-                    <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fmathew.s.pierce.5%2Fvideos%2F10214268153165023%2F&show_text=0&width=560" width="600" height="600" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>
-                </header>
-                <section>
-                    <h2>article section h2</h2>
-                    <p>Embeded video test</p>
-                    <iframe width="560" height="315" src="https://www.youtube.com/embed/UO3h4FBLWqY" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                </section>
-                <footer>
-                    <h3>article footer h3</h3>
-                    <p>feet</p>
-                </footer>
-            </article>
+            {% for post in posts %}
+                <article>
+                    <header>
+                        <h1>{{ post.title }}</h1>
+                    </header>
+                    <section>
+                        <div>
+                            <iframe src="{{ post.video }}" width="600" height="400" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media" allowFullScreen="true"></iframe>
+                        </div>
+                        <div>
+                            {{ post.text }}
+                        </div>
+                    </section>
+                </article>
+            {% endfor %}
 
             <aside>
                 <h3>aside</h3>
