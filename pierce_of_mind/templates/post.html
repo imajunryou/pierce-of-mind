@@ -1,0 +1,30 @@
+<!--from remote_db import TABLE-->
+
+<!--{% for i in TABLE %}-->
+<!--{% set url = TABLE() %}-->
+
+
+{% extends "_base.html" %}
+
+{% block content %}
+<article>
+    <header>
+        <p>
+        <h2>{{title}}</h2>>
+        </p>
+        <p>
+            {{url}}
+        </p>
+        <p>
+            {{text}}
+        </p>
+    </header>
+</article>
+{% endblock %}
+
+{% block sidebar %}
+{% endblock %}
+
+
+{% block footer %}
+{% endblock %}

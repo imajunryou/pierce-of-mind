@@ -74,13 +74,13 @@ body {
 }
 
 .footer-container,
-.sidebar{
+.main aside {
     border-top: 20px solid #e44d26;
 }
 
 .header-container,
 .footer-container,
-.sidebar {
+.main aside {
     background: #f16529;
 }
 
@@ -132,17 +132,14 @@ nav a:hover {
     font-size: 2em;
 }
 
+.main aside {
+    color: white;
+    padding: 0px 5% 10px;
+}
+
 .footer-container footer {
     color: white;
     padding: 20px 0;
-}
-
-/* ==============
-    MOBILE: Sidebar
-   ============== */
-.sidebar {
-    color: white;
-    padding: 0px 5% 10px;
 }
 
 /* ===============
@@ -217,7 +214,7 @@ nav a:hover {
    ==================== */
 
     .header-container,
-     .sidebar {
+    .main aside {
         -webkit-box-shadow: 0 5px 10px #aaa;
            -moz-box-shadow: 0 5px 10px #aaa;
                 box-shadow: 0 5px 10px #aaa;
@@ -233,7 +230,7 @@ nav a:hover {
 
     nav {
         float: right;
-        width: 38%;s
+        width: 38%;
     }
 
 /* ============
@@ -244,10 +241,8 @@ nav a:hover {
         float: left;
         width: 57%;
     }
-/* ============
-    WIDE: Sidebar
-   ============ */
-    .sidebar {
+
+    .main aside {
         float: right;
         width: 28%;
     }
