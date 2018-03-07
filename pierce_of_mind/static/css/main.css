@@ -65,6 +65,7 @@ body {
     margin: 0 5%;
 }
 
+}
 /* ===================
     ALL: Orange Theme
    =================== */
@@ -142,6 +143,9 @@ nav a:hover {
     padding: 20px 0;
 }
 
+
+
+}
 /* ===============
     ALL: IE Fixes
    =============== */
@@ -238,7 +242,7 @@ nav a:hover {
    ============ */
 
     .main article {
-        float: left;
+        float: right;
         width: 57%;
     }
 
@@ -246,7 +250,11 @@ nav a:hover {
         float: right;
         width: 28%;
     }
+
+
 }
+
+
 
 @media only screen and (min-width: 1140px) {
 

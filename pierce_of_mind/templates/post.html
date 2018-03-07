@@ -1,30 +1,39 @@
-<!--from remote_db import TABLE-->
-
-<!--{% for i in TABLE %}-->
-<!--{% set url = TABLE() %}-->
-
-
 {% extends "_base.html" %}
 
 {% block content %}
-<article>
-    <header>
-        <p>
-        <h2>{{title}}</h2>>
-        </p>
-        <p>
-            {{url}}
-        </p>
-        <p>
-            {{text}}
-        </p>
-    </header>
-</article>
+<body>
+    <!--[if lt IE 8]>
+      <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+
+
+    <!--<div class="post">-->
+        <div class="main wrapper clearfix">
+
+        <article >
+            <h1>{{title}}</h1>
+            <p>
+                {{url}}
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/UO3h4FBLWqY" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            </p>
+            <p>
+                {{text}}
+            </p>
+            <p>
+                {{id}}
+            </p>
+        </article>
+
+        </div>
+    <!--</div>-->
+
+</body>
+
 {% endblock %}
 
 {% block sidebar %}
 {% endblock %}
-
 
 {% block footer %}
 {% endblock %}
