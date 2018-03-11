@@ -4,6 +4,7 @@ html {
     color: #222;
     font-size: 1em;
     line-height: 1.4;
+
 }
 
 ::-moz-selection {
@@ -58,6 +59,9 @@ textarea {
 
 body {
     font: 16px/26px Helvetica, Helvetica Neue, Arial;
+
+
+
 }
 
 .wrapper {
@@ -75,13 +79,13 @@ body {
 
 .footer-container,
 .main aside {
-    border-top: 20px solid #e44d26;
+    border-top: 20px solid grey;
 }
 
 .header-container,
 .footer-container,
 .main aside {
-    background: #f16529;
+    background: black;
 }
 
 .title {
@@ -133,6 +137,7 @@ nav a:hover {
 }
 
 .main aside {
+    background-color: black;
     color: white;
     padding: 0px 5% 10px;
 }
