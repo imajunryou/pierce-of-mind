@@ -6,6 +6,7 @@ from . import main
 def index():
     return render_template("index.html")
 
-@main.route("/post")
-def post():
-    return render_template("post.html", title='title from db', url='video url from db', text='text from db')
+
+@main.route("about/")
+def about():
+    return render_template("about.html")
