@@ -139,15 +139,12 @@ nav a:hover {
 .main aside {
     background-color: black;
     color: white;
-    padding: 20px 0;
+    padding: 0px 5% 10px;
 }
 
-/* ==============
-    MOBILE: Sidebar
-   ============== */
-.sidebar {
+.footer-container footer {
     color: white;
-    padding: 0px 5% 10px;
+    padding: 20px 0;
 }
 
 /* ===============
@@ -222,7 +219,7 @@ nav a:hover {
    ==================== */
 
     .header-container,
-     .sidebar {
+    .main aside {
         -webkit-box-shadow: 0 5px 10px #aaa;
            -moz-box-shadow: 0 5px 10px #aaa;
                 box-shadow: 0 5px 10px #aaa;
@@ -238,7 +235,7 @@ nav a:hover {
 
     nav {
         float: right;
-        width: 38%;s
+        width: 38%;
     }
 
 /* ============
@@ -249,10 +246,8 @@ nav a:hover {
         float: left;
         width: 57%;
     }
-/* ============
-    WIDE: Sidebar
-   ============ */
-    .sidebar {
+
+    .main aside {
         float: right;
         width: 28%;
     }
