@@ -1,59 +1,87 @@
 {% extends "_base.html" %}
-
 {% block content %}
-  <!--[if lt IE 8]>
-  <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p><![endif]-->
+  <body>
+    <!--[if lt IE 8]>
+      <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
 
-  <div class="content-container">
-    <div class="latest-container">
-      <iframe
-        src="https://feed.mikle.com/widget/v2/65342/"
-        height="474px"
-        width="100%"
-        class="fw-iframe"
-        scrolling="no"
-        frameborder="0">
-      </iframe>
+    <div class="header-container">
+      <header class="wrapper clearfix">
+        <h1 class="title"></h1>
+
+      </header>
     </div>
 
-    <div class="post-container">
-      {% for post in posts %}
-      <article>
-        <header>
-          <h1>{{ post.title }}</h1>
-        </header>
-        <section>
-          <div>
-            <iframe
-              src="{{ post.video }}"
-              width="600"
-              height="400"
-              style="border:none; overflow:hidden"
-              scrolling="no"
-              frameborder="0"
-              allowTransparency="true"
-              allow="encrypted-media"
-              allowFullScreen="true">
-            </iframe>
-          </div>
-          <div>
-            {{ post.text }}
-          </div>
-        </section>
-      </article>
-      {% endfor %}
-    </div> <!-- #post-container -->
-  </div>
+    <div class="main-container">
+        <div class="main wrapper clearfix">
 
-  <aside class="aside">
-    <h3>RSS Feed</h3>
-    <script type="text/javascript" src="{{ url_for('static', filename='js/rss.js') }}"></script>
-    <script type="text/javascript" src="//feed.surfing-waves.com/js/rss-feed.js"></script>
+            <article>
+                <header>
+                    <h1>article header h1</h1>
+                       <iframe
+                        src="https://feed.mikle.com/widget/v2/65342/"
+                        height="474px"
+                        width="80%"
+                        class="fw-iframe"
+                        scrolling="no"
+                        frameborder="0">
+                        </iframe>
+                </header>
 
-    <h3>Twitter</h3>
-    <a class="twitter-timeline" data-width="300" data-height="400" data-theme="dark" data-link-color="#FAB81E" href="https://twitter.com/pierceofmindpod?ref_src=twsrc%5Etfw">
-      Tweets by pierceofmindpod
-    </a>
-    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-  </aside>
+              <div class="post-container">
+                    {% for post in posts %}
+                    <article>
+                      <header>
+                        <h1>{{ post.title }}</h1>
+                      </header>
+                      <section>
+                        <div>
+                          <iframe
+                            src="{{ post.video }}"
+                            width="600"
+                            height="400"
+                            style="border:none; overflow:hidden"
+                            scrolling="no"
+                            frameborder="0"
+                            allowTransparency="true"
+                            allow="encrypted-media"
+                            allowFullScreen="true">
+                          </iframe>
+                        </div>
+                        <div>
+                          {{ post.text }}
+                        </div>
+                      </section>
+                    </article>
+                    {% endfor %}
+                  </div> <!-- #post-container -->
+
+
+              <footer>
+                    <h3>article footer h3</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sodales urna non odio egestas tempor. Nunc vel vehicula ante. Etiam bibendum iaculis libero, eget molestie nisl pharetra in. In semper consequat est, eu porta velit mollis nec. Curabitur posuere enim eget turpis feugiat tempor.</p>
+                </footer>
+            </article>
+
+            <aside>
+                <h3>RSS Feed</h3>
+                   <script type="text/javascript" src="{{ url_for('static', filename='js/rss.js') }}"></script>
+                    <script type="text/javascript" src="//feed.surfing-waves.com/js/rss-feed.js"></script>
+
+                <p></p>
+
+                <h3>Twitter</h3>
+                    <a class="twitter-timeline" data-width="300" data-height="400" data-theme="dark" data-link-color="#FAB81E" href="https://twitter.com/pierceofmindpod?ref_src=twsrc%5Etfw">
+                  Tweets by pierceofmindpod
+                    </a>
+                    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+            </aside>
+
+
+        </div> <!-- #main -->
+    </div> <!-- #main-container -->
+  </body>
+{% endblock %}
+
+{% block footer %}
 {% endblock %}

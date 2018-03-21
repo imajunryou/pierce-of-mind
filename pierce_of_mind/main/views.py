@@ -5,7 +5,7 @@ from . import main
 
 def connect_db():
     """Connect to the local database"""
-    return sqlite3.connect("pierce.db")
+    return sqlite3.connect("pierceofmind.db")
 
 
 @main.route("/")

@@ -2,7 +2,7 @@
 
 import sqlite3
 
-with sqlite3.connect("pierce.db") as connection:
+with sqlite3.connect("pierceofmind.db") as connection:
 
     # Get cursor object for interacting with database
     c = connection.cursor()
