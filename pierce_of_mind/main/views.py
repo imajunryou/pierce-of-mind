@@ -14,7 +14,7 @@ def index():
 
     # Get all post titles and texts
     cursor = g.db.execute("""SELECT * FROM posts""")
-    posts = [dict(title=row[0], video=row[1], text=row[2]) for row in cursor.fetchall()]
+    posts = [dict(title=row[1], video=row[2], text=row[3], author=row[4], pubDate=row[5], modDate=row[6]) for row in cursor.fetchall()]
     g.db.close()
     return render_template("index.html", posts=posts)
 
@@ -34,7 +34,7 @@ def post(id=None):
     rows = cursor.fetchall()
 
     row = rows[0] if rows else ["This post does not exist", "", ""]
-    post = dict(title=row[0], video=row[1], text=row[2])
+    post = dict(title=row[1], video=row[2], text=row[3], author=row[4], pubDate=row[5], modDate=row[6])
 
     return render_template(
         "post.html",
