@@ -3,7 +3,8 @@ class Config:
 
 
 class DevelopmentConfig(Config):
-    DEBUG = True
+    DEBUG = True,
+    DATABASE = "pierce.db"
 
 
 class TestConfig(Config):

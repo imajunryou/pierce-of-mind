@@ -1,21 +1,21 @@
-from flask import render_template
+import sqlite3
+from flask import g, render_template
 from . import main
+
+
+def connect_db():
+    """Connect to the local database"""
+    return sqlite3.connect("pierceofmind.db")
 
 
 @main.route("/")
 def index():
-    posts = [
-        {
-            "title": "Hello world",
-            "video": 'https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fmathew.s.pierce.5%2Fvideos%2F10214268153165023%2F&show_text=0&width=560',
-            "text": "I am a text"
-        },
-        {
-            "title": "I am a second post!",
-            "video": 'https://www.youtube.com/embed/UO3h4FBLWqY',
-            "text": "I am more text"
-        }
-    ]
+    g.db = connect_db()
+
+    # Get all post titles and texts
+    cursor = g.db.execute("""SELECT * FROM posts""")
+    posts = [dict(title=row[0], video=row[1], text=row[2]) for row in cursor.fetchall()]
+    g.db.close()
     return render_template("index.html", posts=posts)
 
 
@@ -24,11 +24,21 @@ def about():
     return render_template("about.html")
 
 
-@main.route("post/<id>")
+@main.route("post/<int:id>")
 def post(id=None):
+    g.db = connect_db()
+
+    # Get post matching the given ID, if any
+    query = 'SELECT * FROM posts WHERE rowid={id}'
+    cursor = g.db.execute(query.format(id=id))
+    rows = cursor.fetchall()
+
+    row = rows[0] if rows else ["This post does not exist", "", ""]
+    post = dict(title=row[0], video=row[1], text=row[2])
+
     return render_template(
         "post.html",
         id=id,
-        title='title from db',
-        url='video url from db',
-        text='text from db')
+        title=post["title"],
+        url=post["video"],
+        text=post["text"])
