@@ -1,0 +1,84 @@
+body{
+    background-image: url("../img/metal.jpg");
+}
+
+
+.container{
+    overflow:hidden;
+    height: 100vh;
+    width: 100vw;
+    color:white;
+}
+.shaped{
+   /* float:left;*/
+    height:50vh;
+    width:40vw;
+    float:right;
+    background: black url(../img/me.jpg) center top no-repeat;
+    background-size:cover;
+    shape-outside: polygon(0 0, 100% 0, 100% 100%, 30% 100%);
+    shape-margin: 10px;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 30% 100%);
+
+}
+.container1{
+    overflow:hidden;
+    height: 100vh;
+    width: 100vw;
+    color:white;
+}
+
+div.kim{
+     color:red;
+     background-color: orange;
+     height:250px;
+     width: 60%;
+     border-style: solid;
+     border-color: black;
+     margin-bottom: 10px;
+
+ }
+ div.kim img{
+     height: 250px;
+     width: 20%;
+     vertical-align: text-top;
+     margin-right: 10px;
+     float: left;
+
+ }
+ div.kevin{
+     color:red;
+     background-color: orange;
+     height:250px;
+     width: 60%;
+     border-style: solid;
+     border-color: black;
+     margin-bottom: 10px;
+
+ }
+ div.kevin img{
+     height: 250px;
+     width: 20%;
+     vertical-align: text-top;
+     margin-right: 10px;
+     float: left;
+
+ }
+div.gary{
+     color:red;
+     background-color: orange;
+     height:250px;
+     width: 60%;
+     border-style: solid;
+     border-color: black;
+     margin-bottom: 10px;
+
+ }
+ div.gary img{
+     height: 250px;
+     width: 20%;
+     vertical-align: text-top;
+     margin-right: 10px;
+     float: left;
+
+ }

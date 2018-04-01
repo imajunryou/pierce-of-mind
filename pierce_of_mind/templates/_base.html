@@ -13,6 +13,7 @@
 
   <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.min.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/about.css') }}">
 
   <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
 </head>
@@ -27,7 +28,7 @@
         </h1>
         <nav>
           <ul>
-            <li><a href="#">About</a></li>
+            <li><a href="{{ url_for('main.about' )}}">About</a></li>
             <li><a href="#">Shop</a></li>
             <li><a href="#">Archive</a></li>
           </ul>

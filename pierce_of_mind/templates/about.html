@@ -1,23 +1,33 @@
 {% extends "_base.html" %}
 {% block content %}
+    <head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/about.css') }}">
+
+    </head>
+
   <body>
     <!--[if lt IE 8]>
       <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p><![endif]-->
-
-    <div class="header-container">
-      <header class="wrapper clearfix">
-        <h1 class="title"><img src="{{ url_for('static', filename='img/3D.png') }}"/> PIERCE OF MIND</h1>
-        <nav>
-          <ul>
-            <li><a href="#">nav ul li a</a></li>
-            <li><a href="#">nav ul li a</a></li>
-            <li><a href="#">nav ul li a</a></li>
-          </ul>
-        </nav>
-      </header>
+    <div class="container">
+    <div class="shaped"></div>
+    <div class="content">
+         <h1><span>Mr</span> Mathew <br/>Pierce</h1>
+         <p>You’d be tempted to just add a background color to the containing element and then end up with the above result (that’s what I did the first time), but doing that won’t do the job. The reason for that is that all properties of the element, other than the flow of content outside it, won’t be affected by the shape you defined inside it, and they will be rendered normally according to the element’s box model (its rectangular shape), as we’ve seen in the spec. So if you apply a background color to it, you’ll end up with this.You’d be tempted to just add a background color to the containing element and then end up with the above result (that’s what I did the first time), but doing that won’t do the job. The reason for that is that all properties of the element, other than the flow of content outside it, won’t be affected by the shape you defined inside it, and they will be rendered normally according to the element’s box model (its rectangular shape), as we’ve seen in the spec. So if you apply a background color to it, you’ll end up with this.</p>
     </div>
+</div>
 
-
+  <div class="kim">
+    <img src="{{ url_for('static', filename='img/kim.JPG') }}"/>
+      <p> The unofficial yet semi official producer of the Pierce Of Mind Podcast, who spends her days falling deeper in love with her phenominal husband Mat. Kim brings a sense of reality to mats distorted perspectives.</p>
+  </div>
+  <div class="kevin">
+      <img src="{{ url_for('static', filename='img/kevin.JPG') }}"/>
+      <p>This soft spoken Steeler fan takes time out of his busy schedule of doing what his wife tells him to co-host the sports focused shows. </p>
+  </div>
+  <div class="gary">
+      <img src="{{ url_for('static', filename='img/gary.JPG') }}"/>
+      <p>Gary is the latest addition to our friday show. A Buckeye through and through gary brings common sense to the friday editions. </p>
+  </div>
   </body>
 {% endblock %}
 
