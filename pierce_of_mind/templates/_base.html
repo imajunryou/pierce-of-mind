@@ -25,21 +25,20 @@
           <img src="{{ url_for('static', filename='img/3D.png') }}"/>
           PIERCE OF MIND
         </h1>
+        {% block header %}
         <nav>
           <ul>
-            <li><a href="#">About</a></li>
+            <li><a href="{{url_for('main.about')}}">About</a></li>
             <li><a href="#">Shop</a></li>
             <li><a href="#">Archive</a></li>
           </ul>
         </nav>
+        {% endblock %}
       </header>
     </div>
 <!--end header content-->
 
  {% block content %}
-    <!--[if lt IE 8]>
-      <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
  {% endblock %}
 
   {% block footer %}
