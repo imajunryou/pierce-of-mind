@@ -29,17 +29,38 @@ def dropdb():
 @manager.command
 def populatedb():
     if prompt_bool("Are you sure you want to inject fake data?"):
-        p = Post(
-            title="First Post!",
-            content="  ".join(
-                (
-                    "This is the first post inserted into the database.",
-                    "Ever so exciting!"
+        p = [
+            Post(
+                title="First Post!",
+                content="  ".join(
+                    (
+                        "This is the first post inserted into the database.",
+                        "Ever so exciting!"
+                    )
+                ),
+                author="cshepard@bruinmail.slcc.edu",
+            ), Post(
+                title="Second Post!",
+                content="  ".join(
+                    (
+                        "This is the second post.",
+                        "It has three lines of text.",
+                        "Because I feel fancy."
+                    )
                 )
-            ),
-            author="cshepard@bruinmail.slcc.edu",
-        )
-        db.session.add(p)
+            ), Post(
+                title="Adventures Among the Roses",
+                content="  ".join(
+                    (
+                        "This video is about some random thing that was easy to find a url for.",
+                        "Enjoy!"
+                     )
+                ),
+                video="https://www.youtube-nocookie.com/embed/-6Wu0Q7x5D0?rel=0"
+            )
+        ]
+        for post in p:
+            db.session.add(post)
         db.session.commit()
 
 
