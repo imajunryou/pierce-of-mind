@@ -30,15 +30,29 @@ set PIERCE_OF_MIND_CONFIG=path\to\settings.cfg
 ```
 
 ## Initially Building the Database
-A short script is included that will build a basic SQLite3 database, with tables and initial content.  This should be run only once, and only for the purpose of testing.  It will clobber any actual database and its content, and is provided exclusively to get you up off the ground.
+Several commands are included within the `manage.py` script which can be used to configure the database.  It will clobber any actual database and its content, and is provided exclusively to get you up off the ground.
 
-To run the script, navigate to whichever folder contains `manage.py`, and then call the following:
+The available commands are as follows:
 
 ```bash
-python3 pierce_of_mind/sql.py
+python3 manage.py dropdb
 ```
 
-This will build a small database titled `pierce.db`, adjacent to `manage.py`.  This database will be used for persisting any content that exists for the site.
+This will drop the current database, and **destroy all data** that the database contains.  **THIS IS NOT REVERSABLE** unless you have a backup of your database somewhere.  **YOUR DATABASE IS NOT BACKED UP TO THE REPOSITORY**, so you have to manually back it up!
+
+```bash
+python3 manage.py initdb
+```
+
+This will build a small database titled `pierceofmind.db`, located adjacent to `manage.py`.  This database is used to persist any content that exists for the site.
+
+This will also create new tables in the database, using the latest structure information available.  This should be run when first building the database, or immediately after dropping the database with the previous command.  It won't work well if run on an existing database with content.
+
+```bash
+python3 manage.py populatedb
+```
+
+This will inject some fake data into the database.  Why would you want that?  For testing, mostly.  Once you are in a position to put actual data into the system, you shouldn't use this command.
 
 # Starting a local server
 Navigate to your local copy of this repository, and enter the following:

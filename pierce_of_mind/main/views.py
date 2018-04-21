@@ -1,4 +1,4 @@
-from flask import render_template
+from flask import flash, render_template, request
 from . import main
 from .models import Post
 
@@ -37,9 +37,18 @@ def post(id=None):
         text=post["text"])
 
 
-@main.route("edit/")
+@main.route("edit/", methods=['GET', 'POST'])
 def edit():
-    return render_template("edit_page.html")
+    if request.method == 'POST':
+        # Edit the given post
+        flash("Successfully edited the post")
+    return render_template("edit.html", heading="Edit Existing Post")
+
+@main.route("new/", methods=['GET', 'POST'])
+def new():
+    if request.method == 'POST':
+        flash("Successfully created a new post")
+    return render_template("edit.html", heading="Create New Post")
 
 
 @main.route("archive/")
