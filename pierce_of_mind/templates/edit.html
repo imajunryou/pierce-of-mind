@@ -1,28 +1,58 @@
 {% extends "_base.html" %}
 
 {% block content %}
+
+	{% if form.errors %}
+		<h3>There are problems with the form:</h3>
+  	<ul class="errors">
+	  	{% for field_name, field_errors in form.errors|dictsort if field_errors %}
+	  		{% for error in field_errors %}
+	  			<li>{{ form[field_name].label}}: {{error}}</li>
+	  		{% endfor %}
+	  	{% endfor %}
+  	</ul>
+	{% endif %}
+
   <h1>{{heading}}</h1>
 
 	<form method="POST">
-		<label for="title">Title</label>
-		<input type="text" id="title">
+		{{ form.csrf_token }}
 
-		<label for="Author">Author</label>
-		<input type="text" id="Author">
+		<div>
+			{{ form.title.label }}
+			{{ form.title }}
+		</div>
 
-		<label for="video">Video</label>
-		<input type="text" id="video">
+		<div>
+			{{ form.author.label }}
+			{{ form.author }}
+		</div>
 
-		<label>Publish Date</label>
-		<input type="date" id="publish">
+		<div>
+			{{ form.publish_date.label }}
+			{{ form.publish_date }}
+		</div>
 
-		<label for="post">Post</label>
-		<textarea id="post"></textarea>
+		<div>
+		{{ form.video.label }}
+		{{ form.video }}
+		</div>
 
-    <label for="checkbox">Hide post from public</label>
-    <input type="checkbox" name="Do not publish" id="checkbox">
+		<div>
+		{{ form.content.label }}
+		{{ form.content }}
+		</div>
 
-		<input type="submit" value = "Submit">
+		<div>
+    {{ form.private.label }}
+    {{ form.private }}
+  	</div>
+
+
+
+  	<div>
+		{{ form.submit }}
+		</div>
 	</form>
 {% endblock %}
 

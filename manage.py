@@ -12,6 +12,51 @@ app = pierce_app
 
 manager = Manager(app)
 
+dummy_posts = [
+    Post(
+        title="First Post!",
+        content="  ".join(
+            (
+                "This is the first post inserted into the database.",
+                "Ever so exciting!"
+            )
+        ),
+        author="cshepard@bruinmail.slcc.edu",
+        private=True
+    ), Post(
+        title="Second Post!",
+        content="  ".join(
+            (
+                "This is the second post.",
+                "It has three lines of text.",
+                "Because I feel fancy."
+            )
+        ),
+        author="cshepard@bruinmail.slcc.edu",
+        private=False
+    ), Post(
+        title="Adventures Among the Roses",
+        content="  ".join(
+            (
+                "This video is about some random thing that was easy to find a url for.",
+                "Enjoy!"
+             )
+        ),
+        video="https://www.youtube-nocookie.com/embed/-6Wu0Q7x5D0?rel=0",
+        author="cshepard@bruinmail.slcc.edu",
+        private=False
+    )
+]
+
+
+@manager.command
+def recycledb():
+    if prompt_bool("Are you sure you want to replace all of your data with garbage?"):
+        db.drop_all()
+        db.create_all()
+        for post in dummy_posts:
+            db.session.add(post)
+        db.session.commit()
 
 @manager.command
 def initdb():
@@ -29,37 +74,7 @@ def dropdb():
 @manager.command
 def populatedb():
     if prompt_bool("Are you sure you want to inject fake data?"):
-        p = [
-            Post(
-                title="First Post!",
-                content="  ".join(
-                    (
-                        "This is the first post inserted into the database.",
-                        "Ever so exciting!"
-                    )
-                ),
-                author="cshepard@bruinmail.slcc.edu",
-            ), Post(
-                title="Second Post!",
-                content="  ".join(
-                    (
-                        "This is the second post.",
-                        "It has three lines of text.",
-                        "Because I feel fancy."
-                    )
-                )
-            ), Post(
-                title="Adventures Among the Roses",
-                content="  ".join(
-                    (
-                        "This video is about some random thing that was easy to find a url for.",
-                        "Enjoy!"
-                     )
-                ),
-                video="https://www.youtube-nocookie.com/embed/-6Wu0Q7x5D0?rel=0"
-            )
-        ]
-        for post in p:
+        for post in dummy_posts:
             db.session.add(post)
         db.session.commit()
 

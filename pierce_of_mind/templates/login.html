@@ -1,0 +1,25 @@
+{% extends "_base.html" %}
+
+{% block content %}
+
+  {% if form.errors %}
+    <h3>There are problems with the form:</h3>
+    <ul class="errors">
+      {% for field_name, field_errors in form.errors|dictsort if field_errors %}
+        {% for error in field_errors %}
+          <li>{{ form[field_name].label}}: {{error}}</li>
+        {% endfor %}
+      {% endfor %}
+    </ul>
+  {% endif %}
+
+  <form method="POST">
+    {{ form.csrf_token }}
+    <div>{{ form.username.label }}: {{ form.username }}</div>
+    <div>{{ form.password.label }}: {{ form.password }}</div>
+    <div>{{ form.submit }}
+  </form>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
