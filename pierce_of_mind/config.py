@@ -5,6 +5,7 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 class Config:
     DEBUG = False
+    BCRYPT_LOG_ROUNDS = 12
 
 
 class DevelopmentConfig(Config):

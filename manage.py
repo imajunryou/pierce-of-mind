@@ -47,7 +47,8 @@ def populatedb():
                         "It has three lines of text.",
                         "Because I feel fancy."
                     )
-                )
+                ),
+                author="cshepard@bruinmail.slcc.edu",
             ), Post(
                 title="Adventures Among the Roses",
                 content="  ".join(
@@ -56,7 +57,8 @@ def populatedb():
                         "Enjoy!"
                      )
                 ),
-                video="https://www.youtube-nocookie.com/embed/-6Wu0Q7x5D0?rel=0"
+                video="https://www.youtube-nocookie.com/embed/-6Wu0Q7x5D0?rel=0",
+                author="cshepard@bruinmail.slcc.edu",
             )
         ]
         for post in p:

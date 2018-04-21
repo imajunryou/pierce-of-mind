@@ -1,5 +1,6 @@
 from datetime import datetime
-from .. import db
+from sqlalchemy.ext.hybrid import hybrid_property
+from .. import bcrypt, db
 
 
 class Post(db.Model):
@@ -15,10 +16,10 @@ class Post(db.Model):
     mod_date - Date, defaults to None
     """
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    title = db.Column(db.String(256))
+    title = db.Column(db.String(256), nullable=False)
     video = db.Column(db.String(2048), default=None)
     content = db.Column(db.String(10000))
-    author = db.Column(db.String(128))
+    author = db.Column(db.String(128), nullable=False)
     pub_date = db.Column(db.Date(), default=datetime.utcnow())
     mod_date = db.Column(db.Date(), default=None)
 
@@ -26,3 +27,34 @@ class Post(db.Model):
         return "Post #{}: {} by {}".format(
             self.id, self.title, self.author
         )
+
+class User(db.Model):
+    """ Blog user"""
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    email = db.Column(db.String(120), unique=True, nullable=False)
+    first_name = db.Column(db.String(50), nullable=False)
+    last_name = db.Column(db.String(50), nullable=False)
+    _password = db.Column(db.String(128))
+    is_active = db.Column(db.Boolean())
+
+    @hybrid_property
+    def password(self):
+        return self._password
+
+    @password.setter
+    def _set_password(self, plaintext):
+        self._password = bcrypt.generate_password_hash(plaintext)
+
+    def __init__(self, first_name, last_name, email, password):
+        self.first_name = first_name
+        self.last_name = last_name
+        self.email = email
+        self.password = password
+
+    def __repr__(self):
+        return "User {fn} {ln}: {em}".format(
+            fn=self.first_name, ln=self.last_name, em=self.email
+        )
+
+    def is_correct_password(self, plaintext):
+        return bcrypt.check_password_hash(self._password, plaintext)
