@@ -4,6 +4,9 @@ settings.cfg
 # Ignore non-public notes
 notes/
 
+# Ignore sqlite DB journals
+*.db-journal
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -14,6 +17,9 @@ __pycache__/
 
 # Mac specific file
 *.DS_Store
+
+# Databases
+*.db
 
 # Distribution / packaging
 .Python

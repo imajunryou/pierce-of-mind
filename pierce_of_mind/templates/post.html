@@ -2,9 +2,6 @@
 
 {% block content %}
 <body>
-    <!--[if lt IE 8]>
-      <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
 
 
 
@@ -13,15 +10,26 @@
 
         <article >
             <h1>{{title}}</h1>
+            <h4>{{author}} {{pubdate}}</h4>
             <p>
-                {{url}}
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/UO3h4FBLWqY" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+              <div>
+                {% if url is not none %}
+                <iframe
+                  src="{{ url }}"
+                  width="600"
+                  height="400"
+                  style="border:none; overflow:hidden"
+                  scrolling="no"
+                  frameborder="0"
+                  allowTransparency="true"
+                  allow="encrypted-media"
+                  allowFullScreen="true">
+                </iframe>
+                {% endif %}
+              </div>
             </p>
             <p>
                 {{text}}
-            </p>
-            <p>
-                {{id}}
             </p>
         </article>
 

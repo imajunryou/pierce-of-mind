@@ -1,21 +1,17 @@
 from flask import render_template
 from . import main
+from .models import Post
 
 
 @main.route("/")
 def index():
-    posts = [
-        {
-            "title": "Hello world",
-            "video": 'https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fmathew.s.pierce.5%2Fvideos%2F10214268153165023%2F&show_text=0&width=560',
-            "text": "I am a text"
-        },
-        {
-            "title": "I am a second post!",
-            "video": 'https://www.youtube.com/embed/UO3h4FBLWqY',
-            "text": "I am more text"
-        }
-    ]
+    # Get all post titles and texts
+    ps = Post.query.all()
+    posts = []
+    for p in ps:
+        posts.append(
+            dict(id=p.id, title=p.title, video=p.video, text=p.content)
+        )
     return render_template("index.html", posts=posts)
 
 
@@ -24,11 +20,34 @@ def about():
     return render_template("about.html")
 
 
-@main.route("post/<id>")
+@main.route("post/<int:id>")
 def post(id=None):
+    # Get post matching the given ID, if any
+    p = Post.query.get(id)
+    if p is None:
+        post = dict(title="This post does not exist", video="", text="")
+    else:
+        post = dict(title=p.title, video=p.video, text=p.content)
+
     return render_template(
         "post.html",
         id=id,
-        title='title from db',
-        url='video url from db',
-        text='text from db')
+        title=post["title"],
+        url=post["video"],
+        text=post["text"])
+
+
+@main.route("edit/")
+def edit():
+    return render_template("edit_page.html")
+
+
+@main.route("archive/")
+def archive():
+    ps = Post.query.all()
+    posts = []
+    print("PS Size: " + str(len(ps)))
+    for p in ps:
+
+        posts.append(dict(id=p.id, title=p.title))
+    return render_template("archive.html", posts=posts)
