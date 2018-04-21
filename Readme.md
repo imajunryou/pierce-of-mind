@@ -11,10 +11,30 @@ To get up and running, there are 3 broad steps that you need to accomplish:
   + Flask-Script
 + Configure your local copy
   + Create a file called "settings.cfg" in the same folder as the file `config.py`.
+  + Configure your secret key (see below)
   + Point the environment variable "PIERCE\_OF\_MIND\_CONFIG" to this file.
 + Setup your local database
   + If you already have a local copy of the database, skip this section
   + Run the sql.py script (sister to config.py) from the same folder as manage.py
+
+## Configuring the Secret Key
+You need a secret key inside your settings.cfg file in order for various parts of the site (such as authentication and post editing) to work.  The line should be like so:
+
+```python
+SECRET_KEY='your_secret_key_here'
+```
+
+The capitalization, and spelling, of `SECRET_KEY` are important.  The equal sign, and the lack of spaces around it are also important.  The single quotes around the secret key are important, too.
+
+What should your secret key be?  Something hard to guess.  Since you won't be manually typing it in, it is probably best to have it be something really annoying.  Here is a bit of Python that will spit out random unicode strings that could be used:
+
+```python
+>>> import os
+>>> os.urandom(24)
+b'\xfd{H\xe5<\x95\xf9\xe3\x96.5\xd1\x01O<!\xd5\xa2\xa0\x9fR"\xa1\xa8'
+```
+
+Copy-paste everything in the quotes (ignoring the starting b outside the quotes), and use that as your secret key.  **DO NOT** use the key that is actually written above.  It isn't secret.
 
 ## Configuring Environment variables
 On Linux or MacOS, this can be done with:
