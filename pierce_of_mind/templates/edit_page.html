@@ -1,10 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Editing page</title>
-</head>
-<body>
+{% extends "_base.html" %}
+
+{% block content %}
     <h1>Editing page</h1>
 	<form>
 		<label for="title">Title</label>
@@ -16,20 +12,18 @@
 		<label for="video">Video</label>
 		<input type="text" id="video">
 
+		<label>Publish Date</label>
+		<input type="date" id="publish">
+
 		<label for="post">Post</label>
 		<textarea id="post"></textarea>
 
-        <label for="date">Date</label>
-        <input type="date" id="date">
-
-        <label for="checkbox">Date</label>
-        <input type="checkbox" name="Do not publish" id="checkbox">
+    <label for="checkbox">Hide post from public</label>
+    <input type="checkbox" name="Do not publish" id="checkbox">
 
 		<input type="submit" value = "Submit">
 	</form>
+{% endblock %}
 
-</body>
-</html>
-
-
-
+{% block footer %}
+{% endblock %}

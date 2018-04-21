@@ -13,8 +13,10 @@
 
   <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.min.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+  {% block headscripts %}
 
-  <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+  {% endblock %}
+  <script src="{{ url_for('static', filename='js/vendor/modernizr-2.8.3-respond-1.4.2.min.js') }}"></script>
 </head>
 
 <body>
@@ -30,7 +32,7 @@
           <ul>
             <li><a href="{{url_for('main.about')}}">About</a></li>
             <li><a href="#">Shop</a></li>
-            <li><a href="#">Archive</a></li>
+            <li><a href="{{url_for('main.archive')}}">Archive</a></li>
           </ul>
         </nav>
         {% endblock %}
@@ -53,7 +55,7 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
 
-    <script src="js/main.js"></script>
+    <script src="{{url_for('static', filename='js/main.js')}}"></script>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
     <script>

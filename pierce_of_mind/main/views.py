@@ -6,8 +6,12 @@ from .models import Post
 @main.route("/")
 def index():
     # Get all post titles and texts
-    p = Post.query.get(1)
-    posts = [dict(id=p.id, title=p.title, video=p.video, text=p.content)]
+    ps = Post.query.all()
+    posts = []
+    for p in ps:
+        posts.append(
+            dict(id=p.id, title=p.title, video=p.video, text=p.content)
+        )
     return render_template("index.html", posts=posts)
 
 
@@ -31,3 +35,19 @@ def post(id=None):
         title=post["title"],
         url=post["video"],
         text=post["text"])
+
+
+@main.route("edit/")
+def edit():
+    return render_template("edit_page.html")
+
+
+@main.route("archive/")
+def archive():
+    ps = Post.query.all()
+    posts = []
+    print("PS Size: " + str(len(ps)))
+    for p in ps:
+
+        posts.append(dict(id=p.id, title=p.title))
+    return render_template("archive.html", posts=posts)

@@ -12,13 +12,24 @@
             <h1>{{title}}</h1>
             <h4>{{author}} {{pubdate}}</h4>
             <p>
-                {{url}}
+              <div>
+                {% if url is not none %}
+                <iframe
+                  src="{{ url }}"
+                  width="600"
+                  height="400"
+                  style="border:none; overflow:hidden"
+                  scrolling="no"
+                  frameborder="0"
+                  allowTransparency="true"
+                  allow="encrypted-media"
+                  allowFullScreen="true">
+                </iframe>
+                {% endif %}
+              </div>
             </p>
             <p>
                 {{text}}
-            </p>
-            <p>
-                {{id}}
             </p>
         </article>
 
