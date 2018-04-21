@@ -1,5 +1,9 @@
 {% extends "_base.html" %}
 
+{% block headscripts %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/about.css') }}">
+{% endblock %}
+
 {% block header %}
 <nav>
   <ul>
@@ -20,22 +24,48 @@
     <div class="shaped"></div>
     <div class="content">
          <h1><span>Mr</span> Mathew <br/>Pierce</h1>
-         <p>You’d be tempted to just add a background color to the containing element and then end up with the above result (that’s what I did the first time), but doing that won’t do the job. The reason for that is that all properties of the element, other than the flow of content outside it, won’t be affected by the shape you defined inside it, and they will be rendered normally according to the element’s box model (its rectangular shape), as we’ve seen in the spec. So if you apply a background color to it, you’ll end up with this.You’d be tempted to just add a background color to the containing element and then end up with the above result (that’s what I did the first time), but doing that won’t do the job. The reason for that is that all properties of the element, other than the flow of content outside it, won’t be affected by the shape you defined inside it, and they will be rendered normally according to the element’s box model (its rectangular shape), as we’ve seen in the spec. So if you apply a background color to it, you’ll end up with this.</p>
+         <p>This is my baby, a place where open conversation about all topics is welcomed and needed. my goal for this place is to have open dialog from people with every kind of opinion, especially the ones that are directly opposing mine. Also this is a place for me to on occasion spew my frustrations and angers at the way our world acts at any given time. So please join me here for what I hope to be an awesome place of fun and debate. </p>
+        <ul>
+          <li>Favorite Food: I am a simple man, and I love simple things like hot dogs</li>
+          <li>Favorite Sports team: Cleveland Browns Fans since birth.</li>
+          <li>Favorite Super Hero: Batman because he is rich and I love money.</li>
+          <li>Favorite Movie: This one is tough, but right now probably pay it forward.</li>
+      </ul>
     </div>
 </div>
 
   <div class="kim">
-    <img src="{{ url_for('static', filename='img/kim.JPG') }}"/>
+    <img src="{{ url_for('static', filename='img/kim.jpg') }}"/>
       <p> The unofficial yet semi official producer of the Pierce Of Mind Podcast, who spends her days falling deeper in love with her phenominal husband Mat. Kim brings a sense of reality to mats distorted perspectives.</p>
+      <ul>
+          <li>Favorite Food: Mexican</li>
+          <li>Favorite Sports team: I am born a bread Utah Jazz fan!</li>
+          <li>Favorite Super Hero: Wonderwoman, cuz if i can't do Gal Gadot, I might as well be her.</li>
+          <li>Favorite Movie: Dead Poet Society... I am a huge Robin Williams, and I love the message.</li>
+      </ul>
   </div>
   <div class="kevin">
       <img src="{{ url_for('static', filename='img/kevin.jpg') }}"/>
       <p>This soft spoken Steeler fan takes time out of his busy schedule of doing what his wife tells him to co-host the sports focused shows. </p>
+      <ul>
+          <li>Favorite Food: Burgars and pizza</li>
+          <li>Favorite Sports team: I love all things Pittsburgh!</li>
+          <li>Favorite Super Hero: Iron Man, he is smart rich and charismatic.</li>
+          <li>Favorite Movie: I love all the my little pony movies.</li>
+      </ul>
   </div>
   <div class="gary">
       <img src="{{ url_for('static', filename='img/gary.jpg') }}"/>
       <p>Gary is the latest addition to our friday show. A Buckeye through and through gary brings common sense to the friday editions. </p>
+      <ul>
+          <li>Favorite Food: Feed me more PIZZA!</li>
+          <li>Favorite Sports team: I love all Ohio sports but the Cleveland Browns top that my list!</li>
+          <li>Favorite Super Hero: Batman normal rick dude.</li>
+          <li>Favorite Movie: Never Ending Story, Don't anyone dare laugh at me.</li>
+      </ul>
   </div>
+
+
   </body>
 {% endblock %}
 
