@@ -1,5 +1,5 @@
 from flask import flash, redirect, render_template, request, url_for
-from flask_login import login_user, logout_user
+from flask_login import login_required, login_user, logout_user
 from . import main
 from .models import Post, User
 from .forms import LoginForm, PostForm, SignupForm
@@ -81,7 +81,7 @@ def login():
             login_user(db_user)
             # Redirect the user to the index
             flash("Successfully logged in!")
-            return redirect(url_for('main.index'))
+            return form.redirect('main.index')
         else:
             flash("Invalid credentials")
             return redirect(url_for('main.login'))
@@ -89,8 +89,10 @@ def login():
 
 
 @main.route("logout/")
+@login_required
 def logout():
     logout_user()
+    flash("Successfully logged out!")
     return redirect(url_for("main.index"))
 
 
@@ -116,9 +118,19 @@ def post(id=None):
         text=post["text"])
 
 
-@main.route("edit/", methods=['GET', 'POST'])
-def edit():
-    form = PostForm()
+@main.route("edit/<int:id>", methods=['GET', 'POST'])
+@login_required
+def edit(id=None):
+    post = Post.query.get(id)
+    form = PostForm(
+        title=post.title,
+        author=post.author,
+        publish_date=post.pub_date,
+        modify_date=post.mod_date,
+        video=post.video,
+        content=post.content,
+        private=post.private
+    )
     if form.validate_on_submit():
         # Edit the given post
         flash("Successfully edited the post")
@@ -126,6 +138,7 @@ def edit():
 
 
 @main.route("new/", methods=['GET', 'POST'])
+@login_required
 def new():
     form = PostForm()
     if form.validate_on_submit():

@@ -1,4 +1,5 @@
 from datetime import datetime
+from flask_login import UserMixin
 from sqlalchemy.ext.hybrid import hybrid_property
 from .. import bcrypt, db
 
@@ -22,20 +23,20 @@ class Post(db.Model):
     author = db.Column(db.String(128), nullable=False)
     pub_date = db.Column(db.Date(), default=datetime.utcnow())
     mod_date = db.Column(db.Date(), default=None)
+    private = db.Column(db.Boolean(), nullable=False)
 
     def __repr__(self):
         return "Post #{}: {} by {}".format(
             self.id, self.title, self.author
         )
 
-class User(db.Model):
+class User(db.Model, UserMixin):
     """ Blog user"""
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     email = db.Column(db.String(120), unique=True, nullable=False)
     first_name = db.Column(db.String(50), nullable=False)
     last_name = db.Column(db.String(50), nullable=False)
     _password = db.Column(db.String(128))
-    is_active = db.Column(db.Boolean())
 
     @hybrid_property
     def password(self):
