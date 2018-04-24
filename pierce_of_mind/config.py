@@ -12,7 +12,8 @@ class DevelopmentConfig(Config):
     DEBUG = True,
     SQLALCHEMY_DATABASE_URI = (
         "sqlite:///" + os.path.join(basedir, "pierceofmind.db")
-    )
+    ),
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 
 class TestConfig(Config):
