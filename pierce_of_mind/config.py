@@ -9,10 +9,10 @@ class Config:
 
 
 class DevelopmentConfig(Config):
-    DEBUG = True,
+    DEBUG = True
     SQLALCHEMY_DATABASE_URI = (
         "sqlite:///" + os.path.join(basedir, "pierceofmind.db")
-    ),
+    )
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 
