@@ -30,12 +30,14 @@ class Post(db.Model):
             self.id, self.title, self.author
         )
 
-class User(db.Model, UserMixin):
+
+class User(UserMixin, db.Model):
     """ Blog user"""
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     email = db.Column(db.String(120), unique=True, nullable=False)
     first_name = db.Column(db.String(50), nullable=False)
     last_name = db.Column(db.String(50), nullable=False)
+    confirmed = db.Column(db.Boolean(), nullable=False)
     _password = db.Column(db.String(128))
 
     @hybrid_property

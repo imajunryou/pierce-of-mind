@@ -1,10 +1,12 @@
-from flask import flash, redirect, render_template, request, url_for
+from flask import abort, flash, redirect, render_template, request, url_for
 from flask_login import login_required, login_user, logout_user
+from itsdangerous import BadSignature, SignatureExpired
 from . import main
 from .models import Post, User
 from .forms import LoginForm, PostForm, SignupForm
 from .. import db
 from ..util import ts, send_email
+
 
 @main.route("/")
 def index():
@@ -22,15 +24,18 @@ def index():
 def confirm_email(token):
     try:
         email = ts.loads(token, salt="email-confirm-key", max_age=86400)
-    except:
+    except BadSignature:
+        abort(404)
+    except SignatureExpired:
         abort(404)
     user = User.query.filter_by(email=email).first_or_404()
 
-    user.email_confirmed = True
+    user.confirmed = True
 
     db.session.add(user)
     db.session.commit()
 
+    flash("Successfully confirmed your email!  Please log in.")
     return redirect(url_for('main.login'))
 
 
@@ -42,7 +47,8 @@ def signup():
             first_name=form.first_name.data,
             last_name=form.last_name.data,
             email=form.email.data,
-            password=form.password.data
+            password=form.password.data,
+            confirmed=False
         )
         db.session.add(user)
         db.session.commit()
@@ -78,10 +84,17 @@ def login():
             email=form.username.data
         ).first()
         if db_user and db_user.is_correct_password(form.password.data):
-            login_user(db_user)
-            # Redirect the user to the index
-            flash("Successfully logged in!")
-            return form.redirect('main.index')
+            if db_user.confirmed:
+
+                login_user(db_user)
+                # Redirect the user to the index
+                flash("Successfully logged in!")
+                return redirect(
+                    request.args.get('next') or url_for('main.index')
+                )
+            else:
+                flash("You must confirm your email address before logging in!")
+                return redirect(url_for('main.login'))
         else:
             flash("Invalid credentials")
             return redirect(url_for('main.login'))
@@ -134,7 +147,9 @@ def edit(id=None):
     if form.validate_on_submit():
         # Edit the given post
         flash("Successfully edited the post")
-    return render_template("edit.html", heading="Edit Existing Post", form=form)
+    return render_template(
+        "edit.html", heading="Edit Existing Post", form=form
+    )
 
 
 @main.route("new/", methods=['GET', 'POST'])
