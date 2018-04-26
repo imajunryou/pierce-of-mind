@@ -19,9 +19,17 @@
 
                 <div class="post-container">
                   {% for post in posts %}
+                      {% if not post.private or authenticated %}
                   <article>
                     <header>
-                      <h1><a href="{{ url_for('main.post', id=post.id) }}">{{ post.title }}</a></h1>
+                    <h1><a href="{{ url_for('main.post', id=post.id) }}" id="post_{{ post.id }}">{{ post.title }}</a></h1>
+                        {% if authenticated %}
+                        <h5> <a href = "{{url_for('main.edit', id=post.id)}}" id ="edit" >Edit Post</a>
+                            {% if post.private %}
+                                (This post is hidden)
+                            {% endif %} </h5>
+                        {% endif %}
+
                     </header>
                     <section>
                       <div>
@@ -44,6 +52,7 @@
                       </div>
                     </section>
                   </article>
+                      {% endif %}
                   {% endfor %}
                 </div> <!-- #post-container -->
             </article>

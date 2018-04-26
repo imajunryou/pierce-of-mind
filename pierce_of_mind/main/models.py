@@ -22,7 +22,6 @@ class Post(db.Model):
     content = db.Column(db.String(10000))
     author = db.Column(db.String(128), nullable=False)
     pub_date = db.Column(db.Date(), default=datetime.utcnow())
-    mod_date = db.Column(db.Date(), default=None)
     private = db.Column(db.Boolean(), nullable=False)
 
     def __repr__(self):
@@ -37,22 +36,22 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(120), unique=True, nullable=False)
     first_name = db.Column(db.String(50), nullable=False)
     last_name = db.Column(db.String(50), nullable=False)
-    confirmed = db.Column(db.Boolean(), nullable=False)
-    _password = db.Column(db.String(128))
+    confirmed = db.Column(db.Boolean(), nullable=False, default=False)
+    password = db.Column(db.String(128))
 
-    @hybrid_property
-    def password(self):
-        return self._password
+    # @hybrid_property
+    # def password(self):
+    #     return self._password
 
-    @password.setter
-    def _set_password(self, plaintext):
-        self._password = bcrypt.generate_password_hash(plaintext)
+    # @password.setter
+    # def _set_password(self, plaintext):
+    #     self._password = bcrypt.generate_password_hash(plaintext)
 
-    def __init__(self, first_name, last_name, email, password):
+    def __init__(self, first_name, last_name, email, plaintext):
         self.first_name = first_name
         self.last_name = last_name
         self.email = email
-        self.password = password
+        self.password = bcrypt.generate_password_hash(plaintext)
 
     def __repr__(self):
         return "User {fn} {ln}: {em}".format(
@@ -60,4 +59,4 @@ class User(UserMixin, db.Model):
         )
 
     def is_correct_password(self, plaintext):
-        return bcrypt.check_password_hash(self._password, plaintext)
+        return bcrypt.check_password_hash(self.password, plaintext)

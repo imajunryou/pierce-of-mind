@@ -30,9 +30,9 @@
         {% block header %}
         <nav>
           <ul>
-            <li><a href="{{url_for('main.about')}}">About</a></li>
-            <li><a href="#">Shop</a></li>
-            <li><a href="{{url_for('main.archive')}}">Archive</a></li>
+            <li><a href="{{url_for('main.about')}}" id="about">About</a></li>
+            <li><a href="https://pierce-of-mind-podcast.myshopify.com/password" id="shop">Shop</a></li>
+            <li><a href="{{url_for('main.archive')}}" id="archive">Archive</a></li>
           </ul>
         </nav>
         {% endblock %}
@@ -57,7 +57,6 @@
   {% block footer %}
     <div class="footer-container">
       <footer class="wrapper">
-          <h3>footer</h3>
       </footer>
     </div>
   {% endblock %}

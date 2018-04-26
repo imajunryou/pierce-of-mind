@@ -7,9 +7,9 @@
 {% block header %}
 <nav>
   <ul>
-    <li><a href="{{url_for('main.index')}}">Home</a></li>
-    <li><a href="#">Shop</a></li>
-    <li><a href="#">Archive</a></li>
+      <li><a href="{{url_for('main.index')}}" id="home">Home</a></li>
+      <li><a href="https://pierce-of-mind-podcast.myshopify.com/password" id="shop">Shop</a></li>
+      <li><a href="{{url_for('main.archive')}}" id="archive">Archive</a></li>
   </ul>
 </nav>
 {% endblock %}
@@ -69,5 +69,15 @@
   </body>
 {% endblock %}
 
-{% block footer %}
-{% endblock %}
+ {% block footer %}
+    <div class="footer-container">
+      <footer class="wrapper">
+          {% if not user %}
+              <a href="{{ url_for("main.login")}}">Log In</a>
+          {% elif user %}
+              <a href="{{ url_for("main.logout")}}">Log Out</a>
+              <a href="{{ url_for("main.new") }}">Add Post</a>
+          {% endif %}
+      </footer>
+    </div>
+  {% endblock %}

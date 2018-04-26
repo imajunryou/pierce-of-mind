@@ -1,6 +1,7 @@
 {% extends "_base.html" %}
 
 {% block content %}
+<div class="main wrapper clearfix">
 
   {% if form.errors %}
     <h3>There are problems with the form:</h3>
@@ -17,8 +18,10 @@
     {{ form.csrf_token }}
     <div>{{ form.username.label }}: {{ form.username }}</div>
     <div>{{ form.password.label }}: {{ form.password }}</div>
-    <div>{{ form.submit }}
+      <div>{{ form.submit }} <a href="{{url_for('main.signup')}}" class="button"> Sign Up</a> </div>
   </form>
+    <p><p><a href = "{{url_for('main.index')}}" id = "home" > Home </a></p></p>
+</div>
 {% endblock %}
 
 {% block footer %}
