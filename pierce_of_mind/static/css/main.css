@@ -142,10 +142,42 @@ nav a:hover {
     padding: 0px 5% 10px;
 }
 
+.button {
+    background-color: #e44d26;
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+input[type=button], input[type=submit], input[type=reset] {
+    background-color: #e44d26;
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+textarea {
+    width: 100%;
+    height: 150px;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    resize: none;
+}
+
 .footer-container footer {
     color: white;
     padding: 20px 0;
 }
+
 
 /* ===============
     ALL: IE Fixes

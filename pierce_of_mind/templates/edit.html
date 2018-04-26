@@ -2,6 +2,8 @@
 
 {% block content %}
 
+    <div class="main wrapper clearfix">
+
 	{% if form.errors %}
 		<h3>There are problems with the form:</h3>
   	<ul class="errors">
@@ -48,12 +50,15 @@
     {{ form.private }}
   	</div>
 
-
-
   	<div>
 		{{ form.submit }}
-		</div>
+    </div>
+
 	</form>
+
+        <a href = "{{url_for('main.index')}}" id = "home" > Home </a>
+
+    </div>
 {% endblock %}
 
 {% block footer %}

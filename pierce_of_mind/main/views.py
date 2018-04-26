@@ -1,11 +1,12 @@
 from flask import abort, flash, redirect, render_template, request, url_for
-from flask_login import login_required, login_user, logout_user
+from flask_login import login_required, login_user, logout_user, current_user
 from itsdangerous import BadSignature, SignatureExpired
 from . import main
 from .models import Post, User
 from .forms import LoginForm, PostForm, SignupForm
 from .. import db
 from ..util import ts, send_email
+from datetime import datetime
 
 
 @main.route("/")
@@ -15,9 +16,16 @@ def index():
     posts = []
     for p in ps:
         posts.append(
-            dict(id=p.id, title=p.title, video=p.video, text=p.content)
+            dict(
+                id=p.id,
+                title=p.title,
+                video=p.video,
+                text=p.content,
+                private=p.private
+            )
         )
-    return render_template("index.html", posts=posts)
+    authenticated = current_user.is_authenticated
+    return render_template("index.html", posts=posts, authenticated=authenticated)
 
 
 @main.route("confirm/<token>")
@@ -47,8 +55,7 @@ def signup():
             first_name=form.first_name.data,
             last_name=form.last_name.data,
             email=form.email.data,
-            password=form.password.data,
-            confirmed=False
+            plaintext=form.password.data
         )
         db.session.add(user)
         db.session.commit()
@@ -111,7 +118,8 @@ def logout():
 
 @main.route("about/")
 def about():
-    return render_template("about.html")
+    u=current_user.is_authenticated
+    return render_template("about.html", user=u)
 
 
 @main.route("post/<int:id>")
@@ -121,34 +129,51 @@ def post(id=None):
     if p is None:
         post = dict(title="This post does not exist", video="", text="")
     else:
-        post = dict(title=p.title, video=p.video, text=p.content)
+        dt = datetime.strptime(str(p.pub_date), "%Y-%m-%d").strftime("%d-%b-%Y")
+        post = dict(title=p.title, video=p.video, text=p.content, author=p.author, pub_date=dt)
 
     return render_template(
         "post.html",
         id=id,
         title=post["title"],
         url=post["video"],
-        text=post["text"])
+        text=post["text"],
+        pub_date=post["pub_date"],
+        author=post["author"]
+
+        )
+
 
 
 @main.route("edit/<int:id>", methods=['GET', 'POST'])
 @login_required
 def edit(id=None):
     post = Post.query.get(id)
+    title = post.title.capitalize()
     form = PostForm(
-        title=post.title,
+        title=title,
         author=post.author,
         publish_date=post.pub_date,
-        modify_date=post.mod_date,
         video=post.video,
         content=post.content,
         private=post.private
     )
     if form.validate_on_submit():
-        # Edit the given post
+        post.title = form.title.data
+        post.author = form.author.data
+        post.publish_date = form.publish_date.data
+        if form.video.data:
+            post.video = form.video.data
+        else:
+            post.video=None
+        post.content = form.content.data
+        post.private = form.private.data
+        db.session.add(post)
+        db.session.commit()
+
         flash("Successfully edited the post")
     return render_template(
-        "edit.html", heading="Edit Existing Post", form=form
+        "edit.html", heading="Edit Existing Post", form=form, id=id
     )
 
 
@@ -157,6 +182,21 @@ def edit(id=None):
 def new():
     form = PostForm()
     if form.validate_on_submit():
+        if form.video.data:
+            video=form.video.data
+        else:
+            video=None
+        title = form.title.data.capitalize()
+        new_post = Post(
+            title=title,
+            author=form.author.data,
+            pub_date=form.publish_date.data,
+            video=video,
+            content=form.content.data,
+            private=form.private.data
+        )
+        db.session.add(new_post)
+        db.session.commit()
         flash("Successfully created a new post")
     return render_template("edit.html", heading="Create New Post", form=form)
 
@@ -165,8 +205,7 @@ def new():
 def archive():
     ps = Post.query.all()
     posts = []
-    print("PS Size: " + str(len(ps)))
     for p in ps:
-
-        posts.append(dict(id=p.id, title=p.title))
+        dt = datetime.strptime(str(p.pub_date), "%Y-%m-%d").strftime("%d-%b-%Y")
+        posts.append(dict(id=p.id, title=p.title, pub_date=dt))
     return render_template("archive.html", posts=posts)

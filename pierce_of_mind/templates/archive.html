@@ -1,18 +1,21 @@
 {% extends "_base.html" %}
 {% block header %}
+
   <nav>
     <ul>
       <li><a href="{{url_for('main.about')}}">About</a></li>
-      <li><a href="#">Shop</a></li>
+      <li><a href="https://pierce-of-mind-podcast.myshopify.com/password" id="shop">Shop</a></li>
       <li><a href="{{url_for('main.index')}}">Home</a></li>
     </ul>
   </nav>
 {% endblock %}
 
 {% block content %}
+    <div class="main wrapper clearfix">
   {% for post in posts %}
-    <a href="{{ url_for('main.post', id=post.id) }}">{{ post.title }}</a>
+   <div> <a href="{{ url_for('main.post', id=post.id) }}">{{ post.title }}</a> ({{post.pub_date}}) </div>
   {% endfor %}
+    </div>
 {% endblock %}
 
 {% block footer %}

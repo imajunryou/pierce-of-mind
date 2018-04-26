@@ -2,6 +2,8 @@
 
 {% block content %}
 
+    <div class="main wrapper clearfix">
+
   {% if form.errors %}
     <h3>There are problems with the form:</h3>
     <ul class="errors">
@@ -27,8 +29,13 @@
     <div>
       {{ form.password.label }}: {{ form.password }}
     </div>
-    <div>{{ form.submit }}</div>
+      <div> {{ form.submit(class="button") }} <a href="{{url_for('main.login')}}" class="button"> Log In</a> </div>
   </form>
+
+    <p><a href = "{{url_for('main.index')}}" id = "home" > Home </a></p>
+     </div>
+
+
 
 {% endblock %}
 

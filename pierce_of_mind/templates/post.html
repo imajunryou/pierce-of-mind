@@ -10,7 +10,7 @@
 
         <article >
             <h1>{{title}}</h1>
-            <h4>{{author}} {{pubdate}}</h4>
+            <h5> by {{author}}</h5>
             <p>
               <div>
                 {% if url is not none %}
@@ -31,6 +31,11 @@
             <p>
                 {{text}}
             </p>
+            <p>
+                <h5>posted {{pub_date}}</h5>
+            <a href = "{{url_for('main.edit', id=id)}}" id = "edit" >Edit Post</a>
+            </p>
+            <a href = "{{url_for('main.index')}}" id = "home" > Home </a>
         </article>
 
         </div>
